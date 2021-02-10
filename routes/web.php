@@ -14,11 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    //dd('pase');
+    dd(auth()->check() ? 'true' : 'false');
     return redirect('dashboard');
 })->name('web.basepath');
 
 
 Route::get('/{optional?}', function ($optional) {
+
+    //dd(auth()->check() ? 'true' : 'false');
+    if($optional === 'login' && auth()->check()){
+        return redirect('dashboard');
+    }else if($optional !== 'login' && !auth()->check()){
+        return redirect('login');
+    }
 
     return view('app');
 })->where('optional', '.*');

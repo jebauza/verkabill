@@ -3,20 +3,16 @@
 
 @include('sections.head')
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper" id="app">
+<body>
 
-        <app></app>
-
-        {{--   @if (Auth::check())
-        <App basepath="{{route('web.basepath')}}" :auth_user="{{ Auth::user() }}"></App>
+    <div id="app">
+        @if (Auth::check())
+        <app :basepath="{{ json_encode(route('web.basepath')) }}"></app>
         @else
-        <Auth basepath="{{route('web.basepath')}}"></Auth>
-        @endif --}}
+        <login :basepath="{{ json_encode(route('web.basepath')) }}"></login>
+        @endif
 
-        <div id="sidebar-overlay"></div>
     </div>
-    <!-- ./wrapper -->
 
     @include('sections.script')
 
