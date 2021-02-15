@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return redirect('dashboard');
+})->name('web.basepath');
+
+
+Route::get('/{optional?}', function ($optional) {
+
     return view('app');
-});
+})->where('optional', '.*');
