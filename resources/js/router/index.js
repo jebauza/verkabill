@@ -3,10 +3,11 @@ import VueRouter from 'vue-router';
 import store from '../store';
 
 // Pages
-import NotFound from '../views/layouts/NotFound';
-/* import Login from '../views/auth/Login';*/
+import Login from '../views/auth/Login';
+import Register from '../views/auth/Register';
 import Logout from '../views/auth/Logout';
 import Dashboard from '../views/dashboard/Dashboard';
+import NotFound from '../views/layouts/NotFound';
 
 /* function accessVerification(to, from, next, permission) {
     const authUser = JSON.parse(sessionStorage.getItem('authUser'));
@@ -17,6 +18,16 @@ import Dashboard from '../views/dashboard/Dashboard';
         } else {
             next(from.path != '/' ? from.path : '/home');
         }
+    }
+} */
+
+/* const accessVerification = (to, from, next) => {
+    if (store.getters.isAuthenticated && ['login', 'register'].includes(to.name)) {
+        next('/dashboard');
+    } else if (to.name !== 'login' && to.name !== 'register') {
+        next('/login');
+    } else {
+        next();
     }
 } */
 
@@ -37,13 +48,18 @@ const ifAuthenticated = (to, from, next) => {
 }
 
 // Routes
-const routes = [
-    /* {
-            path: '/login',
-            name: 'login',
-            component: Login,
-            beforeEnter: ifNotAuthenticated
-        },*/
+const routes = [{
+        path: '/login',
+        name: 'login',
+        component: Login,
+        beforeEnter: ifNotAuthenticated
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register,
+        beforeEnter: ifNotAuthenticated
+    },
     {
         path: '/logout',
         name: 'logout',
@@ -59,15 +75,14 @@ const routes = [
 
 
 
-    /* {
+    {
         path: '/404',
         name: '404',
         component: NotFound,
-    }, */
+    },
     {
         path: '*',
-        // redirect: '/404',
-        component: NotFound,
+        redirect: '/404',
     },
 ];
 

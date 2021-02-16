@@ -28,11 +28,8 @@
 
 <script>
 export default {
-    props: ['basepath'],
     created() {
-        console.log(this.basepath);
-        axios.defaults.withCredentials = true
-        axios.defaults.baseURL = this.basepath;
+
     },
     data() {
         return {
@@ -48,15 +45,14 @@ export default {
                 email: this.email,
                 password: this.password
             })
-            .then(response => {
-                //this.$router.push({ name: "dashboard" });
-                console.log('aqui');
-                //location.reload();
+            .then(res => {
+                this.$router.push({ name: "dashboard" });
             })
-            .catch(error => {
-                this.error = error.response.data;
+            .catch(err => {
+                this.error = err.response.data;
             });
         }
     }
 };
 </script>
+

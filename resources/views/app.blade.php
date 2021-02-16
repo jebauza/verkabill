@@ -6,11 +6,8 @@
 <body>
 
     <div id="app">
-        @if (Auth::check())
-        <app :basepath="{{ json_encode(route('web.basepath')) }}"></app>
-        @else
-        <login :basepath="{{ json_encode(route('web.basepath')) }}"></login>
-        @endif
+
+        <App :basepath="{{ json_encode(route('web.basepath')) }}"></App>
 
     </div>
 

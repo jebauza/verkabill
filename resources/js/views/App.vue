@@ -1,12 +1,25 @@
 <template>
     <div>
-        <!-- <Navbar :basepath="basepath" :auth_user="authUser" :userPermissions="userPermissions"></Navbar> -->
 
-        <!-- <Sidebar :basepath="basepath" :auth_user="authUser" :userPermissions="userPermissions"></Sidebar> -->
+        <template v-if="isNotLayoutView">
+            <transition name="slide-fade" mode="out-in">
 
-        <Content></Content>
+                <router-view></router-view>
 
-        <!-- <Footer :basepath="basepath"></Footer> -->
+            </transition>
+        </template>
+
+        <template v-else>
+            <!-- <Navbar :basepath="basepath" :auth_user="authUser" :userPermissions="userPermissions"></Navbar> -->
+
+            <!-- <Sidebar :basepath="basepath" :auth_user="authUser" :userPermissions="userPermissions"></Sidebar> -->
+
+            <Content></Content>
+
+            <!-- <Footer :basepath="basepath"></Footer> -->
+        </template >
+
+
     </div>
 </template>
 
@@ -15,8 +28,11 @@ import Content from './layouts/Content';
 
 export default {
     props: ['basepath'],
+
+    components: {Content},
+
     created() {
-        console.log(this.basepath);
+        console.log(this.basepath,);
         axios.interceptors.response.use(undefined, function (err) {
             return new Promise(function (resolve, reject) {
                     if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
@@ -27,6 +43,24 @@ export default {
         });
         axios.defaults.withCredentials = true
         axios.defaults.baseURL = this.basepath;
+
+        const getters = this.$store.getters;
+        if (getters.isAuthenticated && !getters.userAuth) {
+            this.$store.dispatch("getAuthUser");
+        }
+
+        console.log(this.$store.getters,'hhh');
+    },
+
+    computed: {
+        currentRouteName() {
+            return this.$route.name;
+        },
+        isNotLayoutView() {
+            const notLayautViews = ['login', 'register'];
+
+            return notLayautViews.includes(this.$route.name)
+        }
     }
 }
 </script>

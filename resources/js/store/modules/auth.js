@@ -7,6 +7,9 @@ const state = {
 const getters = {
     isAuthenticated: state => !!state.token,
     authStatus: state => state.status,
+
+    authUser: state => state.user,
+    token: state => state.token,
 };
 
 const mutations = {
@@ -44,7 +47,7 @@ const actions = {
                     localStorage.setItem('access_token', token); // store the token in localstorage
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                     commit('AUTH_SUCCESS', token);
-                    //await dispatch('getAuthUser');
+                    dispatch('getAuthUser');
                     resolve(res)
                 })
                 .catch(err => {

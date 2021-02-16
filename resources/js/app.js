@@ -2,15 +2,12 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 
 
-/* Components */
-Vue.component('login', require('./views/auth/login').default);
-Vue.component('app', require('./views/App').default);
-
-
-
 import store from './store';
 import router from './router';
 
+
+/* Components */
+Vue.component('App', require('./views/App').default);
 
 
 if (localStorage.getItem('access_token')) {
