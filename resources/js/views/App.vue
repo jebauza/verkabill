@@ -32,11 +32,13 @@ export default {
     components: {Content},
 
     created() {
-        console.log(this.basepath,);
+        let self = this;
         axios.interceptors.response.use(undefined, function (err) {
             return new Promise(function (resolve, reject) {
                     if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-                        this.$store.dispatch('AUTH_LOGOUT_FULL');
+                        console.log('AUTH_LOGOUT_FULL');
+                        self.$store.commit('AUTH_LOGOUT_FULL');
+                        self.$router.push({ name: "login" });
                     }
                     throw err;
                 });
@@ -48,8 +50,6 @@ export default {
         if (getters.isAuthenticated && !getters.userAuth) {
             this.$store.dispatch("getAuthUser");
         }
-
-        console.log(this.$store.getters,'hhh');
     },
 
     computed: {
