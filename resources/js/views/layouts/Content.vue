@@ -2,7 +2,7 @@
     <div class="content-wrapper" style="min-height: 1184px;">
 
         <!-- BreadCrumb -->
-        <!-- <bread-crumb></bread-crumb> -->
+        <bread-crumb></bread-crumb>
 
         <!-- Main content -->
         <section class="content">
@@ -17,10 +17,10 @@
 </template>
 
 <script>
-/* import BreadCrumb from './BreadCrumb'; */
+import BreadCrumb from './BreadCrumb';
 
 export default {
-    /* components: {BreadCrumb} */
+    components: {BreadCrumb}
 }
 </script>
 

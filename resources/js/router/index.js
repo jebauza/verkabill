@@ -5,9 +5,8 @@ import store from '../store';
 // Pages
 import Login from '../views/auth/Login';
 import Register from '../views/auth/Register';
-import Logout from '../views/auth/Logout';
 import Dashboard from '../views/dashboard/Dashboard';
-import NotFound from '../views/layouts/NotFound';
+import NotFound from '../views/pages/NotFound';
 
 /* function accessVerification(to, from, next, permission) {
     const authUser = JSON.parse(sessionStorage.getItem('authUser'));
@@ -52,25 +51,30 @@ const routes = [{
         path: '/login',
         name: 'login',
         component: Login,
-        beforeEnter: ifNotAuthenticated
+        beforeEnter: (to, from, next) => {
+            ifNotAuthenticated(to, from, next);
+        }
     },
     {
         path: '/register',
         name: 'register',
         component: Register,
-        beforeEnter: ifNotAuthenticated
-    },
-    {
-        path: '/logout',
-        name: 'logout',
-        component: Logout,
-        beforeEnter: ifAuthenticated
+        beforeEnter: (to, from, next) => {
+            ifNotAuthenticated(to, from, next);
+        }
     },
     {
         path: '/dashboard',
         name: 'dashboard',
         component: Dashboard,
-        beforeEnter: ifAuthenticated
+        beforeEnter: (to, from, next) => {
+            ifAuthenticated(to, from, next);
+        },
+        meta: {
+            breadcrumb: [
+                { name: 'Dashboard' }
+            ]
+        }
     },
 
 

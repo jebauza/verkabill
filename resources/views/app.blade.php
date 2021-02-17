@@ -3,12 +3,13 @@
 
 @include('sections.head')
 
-<body>
+<body class="hold-transition sidebar-mini">
 
-    <div id="app">
+    <div class="wrapper" id="app">
 
         <App :basepath="{{ json_encode(route('web.basepath')) }}"></App>
 
+        <div id="sidebar-overlay"></div>
     </div>
 
     @include('sections.script')
