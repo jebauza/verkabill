@@ -1,5 +1,5 @@
 <template>
-    <footer class="main-footer">
+    <footer class="main-footer text-sm">
         © {{ now.format('YYYY') }} Verkabill
     </footer>
 </template>
