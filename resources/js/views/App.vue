@@ -10,13 +10,15 @@
         </template>
 
         <template v-else>
-            <Navbar :basepath="basepath" ></Navbar>
+            <div class="wrapper">
+                <Navbar :basepath="basepath" ></Navbar>
 
-            <Sidebar :basepath="basepath" :userAuth="userAuth"></Sidebar>
+                <Sidebar :basepath="basepath" :userAuth="userAuth"></Sidebar>
 
-            <Content></Content>
+                <Content></Content>
 
-            <Footer></Footer>
+                <Footer></Footer>
+            </div>
         </template >
 
 

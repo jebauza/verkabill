@@ -1,5 +1,5 @@
 <template>
-<aside class="main-sidebar elevation-4 sidebar-dark-primary">
+    <aside class="main-sidebar elevation-4 sidebar-dark-primary">
         <!-- Brand Logo -->
         <router-link :to="{name:'dashboard'}" class="brand-link navbar-danger">
             <img :src="basepath + '/img/AdminLTELogo.png'" alt="AdminLTE Logo"

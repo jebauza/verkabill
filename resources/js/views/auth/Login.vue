@@ -37,6 +37,25 @@
                             <button type="submit" class="btn btn-flat btn-block btn-primary">Login</button>
                         </div>
                     </form>
+
+                    <!-- <div class="social-auth-links text-center mb-3">
+                        <p>- OR -</p>
+                        <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                        </a>
+                        <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                        </a>
+                    </div> -->
+
+                    <!-- <p class="mb-1">
+                        <a href="forgot-password.html">I forgot my password</a>
+                    </p> -->
+
+                    <p class="mb-0">
+                        <router-link :to="{name:'register'}" class="text-center">Registrar un nuevo usuario</router-link>
+                    </p>
+
                 </div>
             </div>
 
@@ -47,7 +66,8 @@
 <script>
 export default {
     created() {
-
+        console.log('login');
+        $('body').removeClass().addClass('login-page');
     },
     data() {
         return {
@@ -56,9 +76,6 @@ export default {
                 password: ''
             },
             errors: {},
-
-            errorLogin: null,
-            fullscreenLoading: false
         }
     },
     methods: {
@@ -80,9 +97,9 @@ export default {
                 loading.close();
                 if (err.response.status == 422) {
                     this.errors = err.response.data.errors;
-                } else if (err.response.status == 403) {
+                } else if (!err.response.data.success && err.response.status == 403) {
                     this.errors = {
-                        email: [err.response.data.msg_error],
+                        email: [err.response.data.message],
                         password: true
                     }
                 }
