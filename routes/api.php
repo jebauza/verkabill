@@ -23,4 +23,8 @@ Route::middleware(['auth:api'])->name('api.')->group(function() {
         Route::get('logout', 'API\AuthApiController@logout')->name('logout');
         Route::get('user', 'API\AuthApiController@user')->name('user');
     });
+
+    Route::prefix('vouchers')->name('vouchers.')->group(function () {
+        Route::get('/', 'API\VoucherApiController@index')->name('index');
+    });
 });
