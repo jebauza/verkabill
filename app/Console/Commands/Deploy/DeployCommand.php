@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands\Deploy;
 
-use App\Models\IdentificationType;
 use App\Models\Voucher;
 use Illuminate\Console\Command;
+use App\Models\IdentificationType;
+use Illuminate\Support\Facades\Artisan;
 
 class DeployCommand extends Command
 {
@@ -39,8 +40,9 @@ class DeployCommand extends Command
      */
     public function handle()
     {
-        $this->createUpdateIdentificationTypes();
+        Artisan::call('migrate');
 
+        $this->createUpdateIdentificationTypes();
         $this->createUpdateVouchers();
 
         $this->info('Scripts launched successfully');
