@@ -1,6 +1,6 @@
 <template>
-    <footer class="main-footer">
-        © {{ now.format('YYYY') }} MySellDapot
+    <footer class="main-footer text-sm">
+        © {{ now.format('YYYY') }} Verkabill
     </footer>
 </template>
 
@@ -8,7 +8,6 @@
 import moment from 'moment';
 
 export default {
-    props: ['basepath'],
     data() {
         return {
             now: moment()

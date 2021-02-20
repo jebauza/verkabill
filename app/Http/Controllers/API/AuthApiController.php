@@ -20,20 +20,16 @@ class AuthApiController extends BaseApiController
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        $input = $request->all();
-        $input['password'] = Hash::make($request->password);
-        $user = User::create($input);
+        $inputs = $request->all();
+        $inputs['password'] = Hash::make($request->password);
+        $user = User::create($inputs);
         // $data['token'] =  $user->createToken($user->email)->accessToken;
         $data['name'] =  $user->name;
 
@@ -55,7 +51,7 @@ class AuthApiController extends BaseApiController
         ]);
 
         if(!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+            return $this->sendError(__('auth.failed'), ['error'=>'Unauthorised'], 403);
         }
 
         $user = Auth::user();

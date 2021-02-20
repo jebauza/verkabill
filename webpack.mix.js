@@ -11,7 +11,23 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+/* mix.js('resources/js/app.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css')
+    .js('node_modules/popper/dist/popper.js', 'public/js').sourceMaps(); */
+
+mix.styles([
+        'resources/vendor/fontawesome/css/all.min.css',
+        'resources/vendor/css/OverlayScrollbars.min.css',
+        'resources/vendor/css/adminlte.min.css',
+        'resources/vendor/css/verkabill.css',
+    ], 'public/css/template.css')
+    .js('resources/js/app.js', 'public/js') //JQuery, Bootstrap, VueJS
+    .vue()
+    .scripts([
+        'resources/vendor/js/jquery.overlayScrollbars.min.js',
+        'resources/vendor/js/adminlte.min.js',
+        'resources/vendor/js/demo.js',
+    ], 'public/js/template.js')
+    .copy('resources/vendor/fontawesome/webfonts', 'public/webfonts')
     .js('node_modules/popper.js/dist/popper.js', 'public/js').sourceMaps();

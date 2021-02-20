@@ -51,7 +51,7 @@ const actions = {
                     resolve(res)
                 })
                 .catch(err => {
-                    localStorage.removeItem('access_token'); // if the request fails, remove any possible user token if possible
+                    commit('AUTH_LOGOUT_FULL');
                     reject(err);
                 });
         });

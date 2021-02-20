@@ -10,13 +10,15 @@
         </template>
 
         <template v-else>
-            <!-- <Navbar :basepath="basepath" :auth_user="authUser" :userPermissions="userPermissions"></Navbar> -->
+            <div class="wrapper">
+                <Navbar :basepath="basepath" ></Navbar>
 
-            <!-- <Sidebar :basepath="basepath" :auth_user="authUser" :userPermissions="userPermissions"></Sidebar> -->
+                <Sidebar :basepath="basepath" :userAuth="userAuth"></Sidebar>
 
-            <Content></Content>
+                <Content></Content>
 
-            <!-- <Footer :basepath="basepath"></Footer> -->
+                <Footer></Footer>
+            </div>
         </template >
 
 
@@ -24,12 +26,15 @@
 </template>
 
 <script>
+import Navbar from './layouts/Navbar';
+import Sidebar from './layouts/Sidebar';
 import Content from './layouts/Content';
+import Footer from './layouts/Footer';
 
 export default {
     props: ['basepath'],
 
-    components: {Content},
+    components: {Navbar,Sidebar,Content,Footer},
 
     created() {
         let self = this;
@@ -60,6 +65,9 @@ export default {
             const notLayautViews = ['login', 'register'];
 
             return notLayautViews.includes(this.$route.name)
+        },
+        userAuth() {
+            return this.$store.getters.userAuth;
         }
     }
 }
