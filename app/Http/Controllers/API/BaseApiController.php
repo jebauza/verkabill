@@ -15,7 +15,7 @@ class BaseApiController extends Controller
     {
     	$response = [
             'success' => true,
-            'message' => $message,
+            'message' => $message ?? 'Request processed successfully.',
         ];
 
         if(!empty($result)){
