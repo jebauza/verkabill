@@ -24,6 +24,16 @@ Route::middleware(['auth:api'])->name('api.')->group(function() {
         Route::get('user', 'API\AuthApiController@user')->name('user');
     });
 
+    // Role
+    Route::prefix('roles')->name('roles.')->group(function () {
+        Route::get('/', 'API\RoleApiController@index')->name('index');
+        Route::get('/paginate', 'API\RoleApiController@paginate')->name('paginate');
+        Route::get('/{role_id}/permissions', 'API\RoleApiController@permissionsByRole')->name('permissions-by-role');
+        Route::post('/store', 'API\RoleApiController@store')->name('store');
+        Route::put('/{role_id}/pupdate', 'API\RoleApiController@update')->name('update');
+    });
+
+    // VOUCHER
     Route::prefix('vouchers')->name('vouchers.')->group(function () {
         Route::get('/', 'API\VoucherApiController@index')->name('index');
     });
