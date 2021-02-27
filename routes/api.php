@@ -30,7 +30,8 @@ Route::middleware(['auth:api'])->name('api.')->group(function() {
         Route::get('/paginate', 'API\RoleApiController@paginate')->name('paginate');
         Route::get('/{role_id}/permissions', 'API\RoleApiController@permissionsByRole')->name('permissions-by-role');
         Route::post('/store', 'API\RoleApiController@store')->name('store');
-        Route::put('/{role_id}/pupdate', 'API\RoleApiController@update')->name('update');
+        Route::put('/{role_id}/update', 'API\RoleApiController@update')->name('update');
+        Route::delete('/{role_id}/destroy', 'API\RoleApiController@destroy')->name('destroy');
     });
 
     // VOUCHER

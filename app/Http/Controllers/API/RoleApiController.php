@@ -115,6 +115,19 @@ class RoleApiController extends BaseApiController
      */
     public function destroy($id)
     {
-        //
+        if(!$role = Role::find($id)) {
+            return $this->sendError('Not found', null, 404);
+        }
+
+        try {
+            DB::beginTransaction();
+            $role->delete();
+
+            DB::commit();
+            return $this->sendResponse('Deleted successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->sendError('Internal Server Error', ['error' => $e->getMessage()], 500);
+        }
     }
 }
