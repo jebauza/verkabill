@@ -85,7 +85,7 @@ class AuthApiController extends BaseApiController
             'message' => 'Successfully logged out'
         ]);
 
-        return $this->sendResponse('Successfully logged out.');
+        return $this->sendResponse('Successfully logged out.', null);
     }
 
     /**

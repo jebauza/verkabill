@@ -11,18 +11,18 @@ class BaseApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendResponse($message, $result = null)
+    public function sendResponse($message, $result = null, $code = 200)
     {
     	$response = [
             'success' => true,
             'message' => $message ?? 'Request processed successfully.',
         ];
 
-        if(!empty($result)){
+        if($result !== null){
             $response['data'] = $result;
         }
 
-        return response()->json($response, 200);
+        return response()->json($response, $code);
     }
 
 
@@ -38,7 +38,7 @@ class BaseApiController extends Controller
             'message' => $message,
         ];
 
-        if(!empty($errorMessages)){
+        if($errorMessages !== null){
             $response['data'] = $errorMessages;
         }
 
